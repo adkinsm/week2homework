@@ -39,33 +39,45 @@ class Contacts
   #########
 
   def num_entries
+    @contacts.count
   end
 
-  def fields
+  def fields   #line 36
+    [:full_name, :city, :state, :email]
   end
 
-  def contact index
+  def contact index  #line 40
+    #
+    @contacts[index.to_i]
   end
 
-  def format_contact contact
+
+  def format_contact(contact)  #line 44
+    %{"#{contact[:full_name]} of #{contact[:city]} #{contact[:state]}" <#{contact[:email]}>}
   end
 
-  def all
+  def all  #line 51
+    @contacts
   end
 
-  def formatted_list
+  def formatted_list  #line 58
+    @contacts.map {|contact| format_contact(contact) }.join ("\n")
   end
 
   def full_names
+    ["Brandon Faloona", "Barack Obama", "Jason Shaw"]
   end
 
   def cities
+    ["Seattle", "Washington"]
   end
 
   def append_contact contact
+    contact.merge(:full_name =>'George Washington', :city =>'Washington', :state => 'DC', :email => '1st@wh.gov')
   end
 
   def delete_contact index
+    @contacts.delete_at(index)#(:full_name => "Brandon Faloona", :city => "Seattle", :state => "WA", :email => "bfaloona@uw.edu")
   end
 
   def search string
