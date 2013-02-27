@@ -65,25 +65,24 @@ class Contacts
   end
 
   def full_names
-    ["Brandon Faloona", "Barack Obama", "Jason Shaw"]
+    @contacts.map {|contact| contact[:full_name]}
   end
 
   def cities
-    ["Seattle", "Washington"]
+    @contacts.map {|contact| contact[:city]}.uniq
   end
 
   def append_contact contact
-    contact.merge(:full_name =>'George Washington', :city =>'Washington', :state => 'DC', :email => '1st@wh.gov')
+    contact.merge(:full_name =>'', :city =>'', :state => '', :email => '')
   end
 
   def delete_contact index
     @contacts.delete_at(index)#(:full_name => "Brandon Faloona", :city => "Seattle", :state => "WA", :email => "bfaloona@uw.edu")
   end
 
-  def search string
-  end
-
-  def all_sorted_by field
+def search field
+    #@contacts.select! {|contact| contact[:city => 'Washington']}
+    @contacts.sort_by {|contact| contact[:full_name]}
   end
   
 end
